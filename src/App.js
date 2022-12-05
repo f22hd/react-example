@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import { Element,Title } from './Element';
+import { useState } from 'react';
 
 const name = "Hello world 2";
-const numbers = [1,2,3,4,5,6,7];
 
 function App() {
+
+  const [numbers,setNumbers] = useState([1,2,3,4,5,6,7]);
 
   /**
    * - events
@@ -28,7 +30,13 @@ function App() {
       return i !== item;
     });
 
+    setNumbers(list);
     console.log(list);
+  }
+
+  const handleShowItem = (item) => {
+    alert(item);
+    
   }
 
   return (
@@ -36,7 +44,11 @@ function App() {
       <h1>{name}</h1>
       <ul>
         {numbers.map( (i) => {
-          return <Element key={i} item={i} itemClicked={handleItemClicked} deleteItem={deleteItemList} />;
+          return <Element 
+          key={i} item={i} itemClicked={handleItemClicked} deleteItem={deleteItemList}
+          showItem={handleShowItem}
+          
+          />;
         })}
       </ul>
       <button type='button' onClick={handleClick}>Click me</button>

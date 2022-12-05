@@ -1,5 +1,5 @@
 
-export const Element = ({item,itemClicked,deleteItem}) => {
+export const Element = ({item,itemClicked,deleteItem,showItem}) => {
     console.log(item);
     
     return <div>
@@ -7,6 +7,10 @@ export const Element = ({item,itemClicked,deleteItem}) => {
         <button type="button" onClick={() => {
             deleteItem(item);
         }}>Delete</button>
+
+<button type="button" onClick={() => {
+            showItem(item);
+        }}>Show</button>
     </div>;
 }
 
