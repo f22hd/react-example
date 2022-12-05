@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Element,Title } from './Element';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const name = "Hello world 2";
 
@@ -16,6 +16,14 @@ function App() {
    * - state
    * - useEffect
    */
+
+  useEffect( () => {
+    setNumbers( numbers.map(i => i * 2) );
+  },[numbers.length] );
+
+  // useEffect(() => {
+  //   setNumbers(numbers.map(i => i * 2))
+  // },[]);
 
   const handleClick = () => {
     alert('clicked');
