@@ -1,25 +1,44 @@
-import { useLocation, useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { getData } from "./service";
 
 export const Page1 = () => {
-    
-    const {name} = useParams();
+  const { name } = useParams();
 
-    const location = useLocation();
-    console.log(location);
-    const params = new URLSearchParams(location.search);
+  const [result, setResult] = useState([]);
 
-    const searchVal = params.get('search');
-    const langVal = params.getAll('lang');
+  const location = useLocation();
+  console.log(location);
+  const params = new URLSearchParams(location.search);
 
-    console.log(langVal)
+  const searchVal = params.get("search");
+  const langVal = params.getAll("lang");
 
-    return (
-        <div>
-            <h1>page 1</h1>
+  console.log(langVal);
 
-            <h4>Name: {name}</h4>
-            <h4>Search: {searchVal}</h4>
-            <h4>lang: {langVal}</h4>
-        </div>
-    )
-}
+  useEffect(() => {
+    getData().then((res) => {
+      console.log(res);
+      setResult(res.result_list);
+    });
+  }, []);
+
+  return (
+    <div
+      style={{
+        textAlign: "center",
+      }}
+    >
+      <h1>page 1</h1>
+
+      {result.map((object) => {
+        return (
+          <div>
+            <h1>{object.title}</h1>
+            <p>{object.level}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
